@@ -1,0 +1,36 @@
+     1                                 %line 1+1 abs.asm
+     2                                 [global _abs]
+     3                                 
+     4                                 
+     5                                 [section .text]
+     6                                 _abs:
+     7                                 
+     8 00000000 55                      push rbp
+     9 00000001 4889E5                  mov rbp, rsp
+    10 00000004 53                      push rbx
+    11                                 
+    12                                 
+    13 00000005 4831C0                  xor rax, rax
+    14                                 
+    15                                 
+    16 00000008 89F8                    mov eax, edi
+    17                                 
+    18                                 
+    19 0000000A 83F800                  cmp eax, 0
+    20 0000000D 7D0A                    jge exit
+    21                                 
+    22                                 
+    23                                 
+    24                                 
+    25 0000000F BBFFFFFFFF              mov ebx, 0xFFFFFFFF
+    26 00000014 29C3                    sub ebx, eax
+    27                                 
+    28                                 
+    29 00000016 89D8                    mov eax, ebx
+    30 00000018 83C001                  add eax, 1
+    31                                 
+    32                                 exit:
+    33                                 
+    34 0000001B 5B                      pop rbx
+    35 0000001C 5D                      pop rbp
+    36 0000001D C3                      ret

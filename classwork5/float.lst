@@ -1,0 +1,41 @@
+     1                                 %line 1+1 float.asm
+     2                                 [section .text]
+     3                                 [global sum]
+     4                                 sum:
+     5                                 
+     6 00000000 55                      push rbp
+     7 00000001 4889E5                  mov rbp, rsp
+     8                                 
+     9                                 
+    10 00000004 4831C0                  xor rax, rax
+    11                                 
+    12 00000007 4883FF00                cmp rdi, 0
+    13 0000000B 742F                    je exit
+    14 0000000D 4883FE00                cmp rsi, 0
+    15 00000011 7429                    je exit
+    16                                 
+    17                                 
+    18 00000013 4889FB                  mov rbx, rdi
+    19 00000016 4889F1                  mov rcx, rsi
+    20                                 
+    21                                 
+    22 00000019 48C7C000000000          mov rax, 0
+    23 00000020 F30F2AC8                cvtsi2ss xmm1, eax
+    24                                 
+    25                                 
+    26                                 sumLoop:
+    27 00000024 F30F1003                movss xmm0, dword [rbx]
+    28 00000028 F30F58C8                addss xmm1, xmm0
+    29 0000002C 4883C304                add rbx, 4
+    30 00000030 4883E901                sub rcx, 1
+    31 00000034 4883F900                cmp rcx, 0
+    32 00000038 75E8                    jne sumLoop
+    33                                 
+    34                                 
+    35 0000003A F30F10C1                movss xmm0, xmm1
+    36                                 
+    37                                 
+    38                                 exit:
+    39 0000003E 5D                      pop rbp
+    40 0000003F C3                      ret
+    41                                 

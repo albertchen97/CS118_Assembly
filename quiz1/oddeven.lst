@@ -1,0 +1,41 @@
+     1                                 %line 1+1 oddeven.asm
+     2                                 [global evens_and_odds]
+     3                                 
+     4                                 
+     5                                 
+     6                                 
+     7                                 
+     8                                 
+     9                                 
+    10                                 [section .text]
+    11                                 
+    12                                 evens_and_odds:
+    13                                 
+    14 00000000 55                      push rbp
+    15 00000001 4889E5                  mov rbp, rsp
+    16                                 
+    17 00000004 4831C0                  xor rax, rax
+    18 00000007 4D31C0                  xor r8, r8
+    19                                 
+    20                                 
+    21 0000000A 8B1F                    mov ebx, dword [rdi]
+    22 0000000C 83E301                  and ebx, 0x1
+    23 0000000F 83FB01                  cmp ebx, 1
+    24 00000012 75FE                    jne even
+    25                                 
+    26                                 even:
+    27 00000014 8B07                    mov eax, dword [rdi]
+    28 00000016 8906                    mov dword [rsi], eax
+    29 00000018 4883C604                add rsi, 4
+    30 0000001C 4983C001                add r8, 1
+    31 00000020 EBDC                    jmp evens_and_odds
+    32                                 
+    33                                 
+    34                                 
+    35                                 
+    36                                 
+    37                                 
+    38                                 exit:
+    39 00000022 4C89C0                  mov rax, r8
+    40 00000025 5D                      pop rbp
+    41 00000026 C3                      ret

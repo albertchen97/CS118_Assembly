@@ -1,0 +1,64 @@
+     1                                 %line 1+1 quiz.asm
+     2                                 [global evens_and_odds]
+     3                                 
+     4                                 
+     5                                 [section .text]
+     6                                 
+     7                                 
+     8                                 
+     9                                 
+    10                                 
+    11                                 
+    12                                 
+    13                                 
+    14                                 evens_and_odds:
+    15                                 
+    16 00000000 55                      push rbp
+    17 00000001 4889E5                  mov rbp, rsp
+    18 00000004 4154                    push r12
+    19                                 
+    20 00000006 4831C0                  xor rax, rax
+    21 00000009 4989CC                  mov r12, rcx
+    22 0000000C 48C7C100000000          mov rcx, 0
+    23                                 
+    24 00000013 4883FF00                cmp rdi, 0
+    25 00000017 7440                    je exit
+    26 00000019 4983FC00                cmp r12, 0
+    27 0000001D 743A                    je exit
+    28                                 
+    29                                 
+    30                                 
+    31                                 evenLoop:
+    32                                 
+    33 0000001F 4989FA                  mov r10, rdi
+    34 00000022 4983E200                and r10, 0
+    35                                 
+    36 00000026 4983FA00                cmp r10, 0
+    37 0000002A 740C                    je add_even
+    38                                 
+    39 0000002C 4883C704                add rdi, 4
+    40 00000030 4983EC01                sub r12, 1
+    41 00000034 4983FC00                cmp r12, 0
+    42 00000038 75E3                    jne evenLoop
+    43                                 
+    44                                 add_even:
+    45 0000003A 4889FE                  mov rsi, rdi
+    46                                 
+    47 0000003D 8B06                    mov eax, dword[rsi]
+    48 0000003F 8906                    mov dword[rsi], eax
+    49                                 
+    50 00000041 4883C101                add rcx, 1
+    51 00000045 4883C604                add rsi, 4
+    52                                 
+    53 00000049 4883C704                add rdi, 4
+    54 0000004D 4983EC01                sub r12, 1
+    55 00000051 4983FC00                cmp r12, 0
+    56 00000055 75C6                    jne evenLoop
+    57                                 
+    58 00000057 8B01                    mov eax, dword[rcx]
+    59 00000059 8901                    mov dword[rcx], eax
+    60                                 
+    61                                 exit:
+    62 0000005B 415C                    pop r12
+    63 0000005D 5D                      pop rbp
+    64 0000005E C3                      ret
