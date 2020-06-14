@@ -1,7 +1,0 @@
-     1                                 %line 1+1 and.asm
-     2                                 [section .text]
-     3                                 [global _start]
-     4                                 _start:
-     5 00000000 4831C0                  xor rax, rax
-     6 00000003 B8DDDDDDDD              mov eax, 0xDDDDDDDD
-     7 00000008 83E00F                  and eax, 0x0F
