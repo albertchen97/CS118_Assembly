@@ -1,0 +1,42 @@
+     1                                 %line 1+1 grayscale.asm
+     2                                 [section .text]
+     3                                 
+     4                                 [global gray_scale_asm]
+     5                                 gray_scale_asm:
+     6                                 
+     7                                 
+     8 00000000 55                      push rbp
+     9 00000001 4889E5                  mov rbp, rsp
+    10 00000004 51                      push rcx
+    11                                 
+    12                                 
+    13 00000005 4831C0                  xor rax, rax
+    14 00000008 48C7C000000000          mov rax, 0
+    15                                 
+    16 0000000F 8B3F                    mov edi, dword [rdi]
+    17                                 
+    18 00000011 B9000000FF              mov ecx, dword 0xFF000000
+    19 00000016 21F9                    and ecx, edi
+    20 00000018 C1E918                  shr ecx, 24
+    21 0000001B 01C8                    add eax, ecx
+    22                                 
+    23 0000001D B90000FF00              mov ecx, dword 0x00FF0000
+    24 00000022 21F9                    and ecx, edi
+    25 00000024 C1E910                  shr ecx, 16
+    26 00000027 01C8                    add eax, ecx
+    27                                 
+    28 00000029 B900FF0000              mov ecx, dword 0x0000FF00
+    29 0000002E 21F9                    and ecx, edi
+    30 00000030 C1E908                  shr ecx, 8
+    31 00000033 01C8                    add eax, ecx
+    32                                 
+    33 00000035 B103                    mov cl, 3
+    34 00000037 F6F1                    div cl
+    35                                 
+    36                                 
+    37                                 exit:
+    38 00000039 59                      pop rcx
+    39 0000003A 5D                      pop rbp
+    40 0000003B C3                      ret
+    41                                 
+    42                                 
